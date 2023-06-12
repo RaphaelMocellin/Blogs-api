@@ -10,6 +10,12 @@ const getAll = async (_req, res) => {
   }
 };
 
+const createUser = async (req, res) => {
+  const { displayName, email, password, image } = req.body;
+  const { type, data } = await UserService.createUser(displayName, email, password, image);
+  return res.status(type).json(data);
+};
+
 // const getByEmailAndPassword = async (req, res) => {
 //     try {
 //       const { email, password } = req.query;
@@ -26,5 +32,6 @@ const getAll = async (_req, res) => {
 
 module.exports = {
   getAll,
+  createUser,
 //   getByEmailAndPassword
 };
