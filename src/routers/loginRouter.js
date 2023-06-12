@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const { loginController } = require('../controllers');
 
-loginRouter = Router();
+const loginRouter = Router();
 
 loginRouter.post('/', loginController.makeLogin);
 

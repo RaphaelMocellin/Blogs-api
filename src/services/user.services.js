@@ -19,5 +19,5 @@ const getByEmailAndPassword = async (email, password) => {
 
 module.exports = {
   getAll,
-  getByEmailAndPassword
+  getByEmailAndPassword,
 };

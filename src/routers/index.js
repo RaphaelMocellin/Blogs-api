@@ -1,5 +1,5 @@
 const loginRouter = require('./loginRouter');
 
 module.exports = {
-    loginRouter
-}
+    loginRouter,
+};
