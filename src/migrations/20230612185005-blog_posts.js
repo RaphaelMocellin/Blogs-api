@@ -2,34 +2,38 @@
 
 module.exports = {
   up: (queryInterface, DataTypes) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('blog_posts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      display_name: {
+      title: {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      email: {
-        allowNull: true,
-        type: DataTypes.STRING,
-        unique: true,
-      },
-      password: {
+      content: {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      image: {
-        allowNull: true,
+      user_id: {
+        allowNull: false,
         type: DataTypes.STRING,
+        references: { model: 'users', key: 'id' },
+      },
+      published: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updated: {
+        allowNull: false,
+        type: DataTypes.DATE,
       },
     });
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('blog_posts');
   },
 };
