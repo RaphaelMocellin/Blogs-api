@@ -1,8 +1,8 @@
-const { UserService } = require('../services');
+const { userService } = require('../services');
 
 const getAll = async (_req, res) => {
   try {
-    const users = await UserService.getAll();
+    const users = await userService.getAll();
     return res.status(200).json(users);
   } catch (e) {
     console.log(e.message);
@@ -12,7 +12,7 @@ const getAll = async (_req, res) => {
 
 const createUser = async (req, res) => {
   const { displayName, email, password, image } = req.body;
-  const { type, data } = await UserService.createUser(displayName, email, password, image);
+  const { type, data } = await userService.createUser(displayName, email, password, image);
   return res.status(type).json(data);
 };
 
