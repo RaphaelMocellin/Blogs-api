@@ -15,7 +15,12 @@ const getByEmailAndPassword = async (email, password) => {
     return user;
   };
 
-  const createUser = async (displayName, email, password, image) => {
+const getUserById = async (id) => {
+    const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+    return user;
+  };
+
+const createUser = async (displayName, email, password, image) => {
     const verifyEmail = await User.findOne({ where: { email } });
     if (verifyEmail) return { type: 409, data: { message: 'User already registered' } }; 
   
@@ -35,4 +40,5 @@ module.exports = {
   getAll,
   getByEmailAndPassword,
   createUser,
+  getUserById,
 };

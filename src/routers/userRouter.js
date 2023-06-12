@@ -10,6 +10,7 @@ const tokenAuth = require('../middlewares/auth');
 const userRouter = Router();
 
 userRouter.get('/', tokenAuth, userController.getAll);
+userRouter.get('/:id', tokenAuth, userController.getUserById);
 userRouter.post(
 '/', 
 validateDisplayName,

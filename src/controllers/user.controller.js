@@ -16,22 +16,16 @@ const createUser = async (req, res) => {
   return res.status(type).json(data);
 };
 
-// const getByEmailAndPassword = async (req, res) => {
-//     try {
-//       const { email, password } = req.query;
-//       const user = await UserService.getByIdAndEmail(email, password);
-  
-//       if (!user) return res.status(400).json({ message: 'Invalid fields' });
-  
-//       return res.status(200).json(user);
-//     } catch (e) {
-//       console.log(e.message);
-//       res.status(500).json({ message: 'Deu ruim' });
-//     }
-//   };
+const getUserById = async (req, res) => {
+  const user = await userService.getUserById(req.params.id);
+
+  if (!user) return res.status(404).json({ message: 'User does not exist' });
+
+  res.status(200).json(user);
+};
 
 module.exports = {
   getAll,
   createUser,
-//   getByEmailAndPassword
+  getUserById,
 };
