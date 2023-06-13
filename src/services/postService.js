@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV;
 
 const sequelize = new Sequelize(config[env]);
 
-const { Category, BlogPost, PostCategory } = require('../models');
+const { Category, BlogPost, PostCategory, User } = require('../models');
 
 const verifyIds = async (categoryIds) => {
     const { count } = await Category.findAndCountAll({ where: { id: categoryIds } });
@@ -35,7 +35,18 @@ const createPost = async (title, content, categoryIds, token) => {
     return trans;
 };
 
+const getAll = async () => {
+  const posts = await BlogPost
+    .findAll({ include: [{ model: User, as: 'user', attributes: { exclude: 'password' } },
+    { model: Category, as: 'categories' }] });
+
+    // console.log(posts);
+
+  return posts;
+};
+
   module.exports = {
     verifyIds,
     createPost,
+    getAll,
   };

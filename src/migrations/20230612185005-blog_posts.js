@@ -21,6 +21,8 @@ module.exports = {
         allowNull: false,
         type: DataTypes.INTEGER,
         references: { model: 'users', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       published: {
         allowNull: false,
