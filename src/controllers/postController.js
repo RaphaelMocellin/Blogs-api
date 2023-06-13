@@ -1,7 +1,7 @@
 const { postService } = require('../services');
 
 const createPost = async (req, res) => {
-    const token = req.headers.authorization;
+  const token = req.headers.authorization;
   const { title, content, categoryIds } = req.body;
 
   const count = await postService.verifyIds(categoryIds);
