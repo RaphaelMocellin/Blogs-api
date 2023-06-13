@@ -17,7 +17,7 @@ const verifyIds = async (categoryIds) => {
 
 const findUserIdByToken = async (token) => {
     const { data: { userId } } = jwt.verify(token, JWT_SECRET);
-    console.log(userId);
+    // console.log(userId);
     return userId;
   };
 
@@ -55,9 +55,23 @@ const getById = async (id) => {
   return post;
 };
 
+const updatePost = async (title, content, id) => {
+  await BlogPost.update({ title, content }, { where: { id } });
+  
+  const data = await BlogPost
+  .findByPk(id, { include: [{ model: User, as: 'user', attributes: { exclude: 'password' } },
+  { model: Category, as: 'categories' }] });
+
+  if (!data) return { type: 404, data: { message: 'Post does not exist' } };
+
+  return { type: 200, data };
+};
+
   module.exports = {
     verifyIds,
     createPost,
     getAll,
     getById,
+    findUserIdByToken,
+    updatePost,
   };
