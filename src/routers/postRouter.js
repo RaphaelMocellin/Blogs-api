@@ -8,6 +8,7 @@ const validatePostFields = require('../middlewares/validatePostFields');
 const postRouter = Router();
 
 postRouter.get('/', tokenAuth, postController.getAll);
+postRouter.get('/:id', tokenAuth, postController.getById);
 postRouter.post('/', tokenAuth, validatePostFields, postController.createPost);
 
 module.exports = postRouter;
