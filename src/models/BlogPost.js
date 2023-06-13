@@ -1,13 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
-    const Category = sequelize.define('Category', {
-      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-      name: DataTypes.STRING,
-    },
-    {
-      timestamps: false,
-      tableName: 'categories',
-      underscored: true,
-    });
+    const BlogPost = sequelize.define('BlogPost', {
+        id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+        title: DataTypes.STRING,
+        content: DataTypes.STRING,
+        userId: DataTypes.INTEGER,
+        published: DataTypes.DATE,
+        updated: DataTypes.DATE,
+      }, {
+          tableName: 'categories',
+          timestamps: false,
+          underscored: true,
+        });
   
-    return Category;
+    BlogPost.associate = ({ User }) => {
+        BlogPost.belongsTo(User, {
+              as: 'users',
+              foreignKey: 'userId',
+            })
+          }
+        
+          return BlogPost;
   };
