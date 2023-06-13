@@ -7,7 +7,7 @@ const validateName = require('../middlewares/validateName');
 
 const categoryRouter = Router();
 
-categoryRouter.get('/', tokenAuth, categoryController.getAllCategory);
+categoryRouter.get('/', tokenAuth, categoryController.getAllCategories);
 categoryRouter.post('/', tokenAuth, validateName, categoryController.createCategory);
 
 module.exports = categoryRouter;
