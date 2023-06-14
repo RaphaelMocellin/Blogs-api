@@ -67,6 +67,10 @@ const updatePost = async (title, content, id) => {
   return { type: 200, data };
 };
 
+const deletePost = async (id) => {
+  await BlogPost.destroy({ where: { id } });
+};
+
   module.exports = {
     verifyIds,
     createPost,
@@ -74,4 +78,5 @@ const updatePost = async (title, content, id) => {
     getById,
     findUserIdByToken,
     updatePost,
+    deletePost,
   };
