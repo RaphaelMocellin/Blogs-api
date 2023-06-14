@@ -42,7 +42,10 @@ const updatePost = async (req, res) => {
   const { title, content } = req.body;
 
   const userId = await postService.findUserIdByToken(token);
-  if (Number(userId) !== Number(id)) return res.status(401).json({ message: 'Unauthorized user' });
+  const postId = await postService.getById(id);
+  if (Number(userId) !== Number(postId.userId)) {
+    return res.status(401).json({ message: 'Unauthorized user' });
+  } 
 
   const { type, data } = await postService.updatePost(title, content, id);
   return res.status(type).json(data);
