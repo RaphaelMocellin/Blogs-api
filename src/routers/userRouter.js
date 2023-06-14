@@ -18,5 +18,6 @@ validateEmail,
 validatePassword, 
 userController.createUser,
 );
+userRouter.delete('/me', tokenAuth, userController.deleteUser);
 
 module.exports = userRouter;
