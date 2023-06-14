@@ -9,6 +9,7 @@ const validateUpdateFields = require('../middlewares/validateUpdateFields');
 const postRouter = Router();
 
 postRouter.get('/', tokenAuth, postController.getAll);
+postRouter.get('/search', tokenAuth, postController.getBySearch);
 postRouter.get('/:id', tokenAuth, postController.getById);
 postRouter.post('/', tokenAuth, validatePostFields, postController.createPost);
 postRouter.put('/:id', tokenAuth, validateUpdateFields, postController.updatePost);

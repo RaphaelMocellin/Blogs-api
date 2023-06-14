@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Sequelize = require('sequelize');
+const { Op } = require('sequelize');
 const config = require('../config/config');
 
 const { JWT_SECRET } = process.env;
@@ -71,6 +72,21 @@ const deletePost = async (id) => {
   await BlogPost.destroy({ where: { id } });
 };
 
+const getBySearch = async (q) => {
+  if (!q) {
+    const posts = await getAll();
+    return posts;
+  }
+
+  const posts = await BlogPost.findAll({
+    where: { [Op.or]: [{ title: { [Op.substring]: q } },
+     { content: { [Op.substring]: q } }] },
+     include: [{ model: User, as: 'user', attributes: { exclude: 'password' } }, 
+     { model: Category, as: 'categories' }],
+   });
+   return posts;
+};
+
   module.exports = {
     verifyIds,
     createPost,
@@ -79,4 +95,5 @@ const deletePost = async (id) => {
     findUserIdByToken,
     updatePost,
     deletePost,
+    getBySearch,
   };
