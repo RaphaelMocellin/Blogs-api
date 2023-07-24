@@ -20,12 +20,18 @@ npm install
 
 ## Usage
 
+This project is using docker.
 To run the project in your machine:
 
 ```bash
-npm run dev
+docker-compose up -d --build
 ```
+This will put up 2 containers, blogs_api and blogs_api_db.
 
+If you wish to see the terminal inside the container, use the comand bellow:
+```bash
+docker exec -it blogs_api bash
+```
 ## Routes
 
 These are the available routes:
